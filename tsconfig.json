@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "system",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "noImplicitAny": false,
-    "outDir": "./target",
-    "rootDir": "./",
-    "experimentalDecorators": true,
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
-    "sourceMap" : false
-  }
-,
+    "experimentalDecorators": true,
+    "lib": [ "es2015", "dom" ],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
   "exclude": [
     "node_modules",
     "typings/main.d.ts",
