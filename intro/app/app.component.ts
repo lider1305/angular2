@@ -40,4 +40,7 @@ export class AppComponent{
             this.buttonLabel= this.isPaused ? "Resume" : "Pause";
         }
     }
+    countdownCompleted(){
+        alert("End of time!");
+    }
 }

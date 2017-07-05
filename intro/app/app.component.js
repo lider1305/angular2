@@ -39,6 +39,9 @@ var AppComponent = (function () {
             this.buttonLabel = this.isPaused ? "Resume" : "Pause";
         }
     };
+    AppComponent.prototype.countdownCompleted = function () {
+        alert("End of time!");
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
