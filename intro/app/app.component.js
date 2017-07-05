@@ -9,43 +9,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var TasksService = (function () {
+    function TasksService() {
+        this.taskStore = [];
+        var tasks = [
+            {
+                name: "Code HTML",
+                deadline: "Jun 23 2018",
+                pomodorosRequired: 1
+            }, {
+                name: "Sketch a wireframe for the new homepage",
+                deadline: "Jun 24 2018",
+                pomodorosRequired: 2
+            }, {
+                name: "Style table with Bootstrap styles",
+                deadline: "Jun 25 2016",
+                pomodorosRequired: 1
+            }, {
+                name: "Reinforce SEO with custom sitemap.xml",
+                deadline: "Jun 26 2016",
+                pomodorosRequired: 3
+            }
+        ];
+        this.taskStore = tasks.map(function (task) {
+            return {
+                name: task.name,
+                deadline: new Date(task.deadline),
+                queued: false,
+                pomodorosRequired: task.pomodorosRequired
+            };
+        });
+    }
+    return TasksService;
+}());
+exports.TasksService = TasksService;
 var AppComponent = (function () {
     function AppComponent() {
-        var _this = this;
-        this.greeting = "Hello A2";
-        this.resetTimer();
-        setInterval(function () { return _this.tick(); }, 1000);
+        this.queueHeaderMapping = {
+            '=0': 'No pomodoros',
+            '=1': 'One pomodoro',
+            'other': '# pomodoros'
+        };
+        this.tasksService = new TasksService();
+        this.tasks = this.tasksService.taskStore;
+        this.today = new Date();
+        this.updateQueuedPomodoros();
     }
-    AppComponent.prototype.tick = function () {
-        if (!this.isPaused) {
-            this.buttonLabel = "Pause";
-            if (--this.seconds < 0) {
-                this.seconds = 59;
-                if (--this.minutes < 0) {
-                    this.resetTimer();
-                }
-            }
-        }
+    AppComponent.prototype.toggleTask = function (task) {
+        task.queued = !task.queued;
+        this.updateQueuedPomodoros();
     };
-    AppComponent.prototype.resetTimer = function () {
-        this.minutes = 24;
-        this.seconds = 59;
-        this.buttonLabel = "Start";
-        this.togglePause();
-    };
-    AppComponent.prototype.togglePause = function () {
-        this.isPaused = !this.isPaused;
-        if (this.minutes < 24 || this.seconds < 59) {
-            this.buttonLabel = this.isPaused ? "Resume" : "Pause";
-        }
-    };
-    AppComponent.prototype.countdownCompleted = function () {
-        alert("End of time!");
+    AppComponent.prototype.updateQueuedPomodoros = function () {
+        this.queuedPomodoros = this.tasks
+            .filter(function (task) { return task.queued; })
+            .reduce(function (pomodoros, queuedTask) {
+            return pomodoros + queuedTask.pomodorosRequired;
+        }, 0);
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
-            templateUrl: "./app/main.html"
+            templateUrl: "./app/main.html",
+            styleUrls: ['./app/style.css']
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

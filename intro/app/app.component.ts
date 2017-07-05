@@ -1,46 +1,74 @@
-import {Component} from "@angular/core";
+import {Component, Input, Pipe, PipeTransform, Directive, OnInit, HostListener} from "@angular/core";
+
+import {Task} from "./task";
+
+export class TasksService{
+    public taskStore: Array<Task> = [];
+
+    constructor(){
+        const tasks =[
+            {
+                name: "Code HTML",
+                deadline: "Jun 23 2018",
+                pomodorosRequired: 1
+            },{
+                name: "Sketch a wireframe for the new homepage",
+                deadline: "Jun 24 2018",
+                pomodorosRequired: 2
+            }, {
+                name: "Style table with Bootstrap styles",
+                deadline: "Jun 25 2016",
+                pomodorosRequired: 1
+            }, {
+                name: "Reinforce SEO with custom sitemap.xml",
+                deadline: "Jun 26 2016",
+                pomodorosRequired: 3
+            }
+        ];
+
+        this.taskStore = tasks.map(task=>{
+            return{
+                name:task.name,
+                deadline: new Date(task.deadline),
+                queued: false,
+                pomodorosRequired: task.pomodorosRequired
+            }
+        });
+    }
+}
 
 @Component({
     selector:'app',
-    templateUrl: "./app/main.html"
+    templateUrl: "./app/main.html",
+    styleUrls: ['./app/style.css']
 })
 export class AppComponent{
-    greeting: string;
-    minutes: number;
-    seconds: number;
-    buttonLabel: string;
-    isPaused: boolean;
+    today:Date;
+    tasks:Task[];
+    queuedPomodoros: number;
+    tasksService: TasksService;
+    queueHeaderMapping: any = {
+        '=0': 'No pomodoros',
+        '=1': 'One pomodoro',
+        'other': '# pomodoros'
+    };
     constructor(){
-        this.greeting="Hello A2";
-        this.resetTimer();
-        setInterval(()=>this.tick(), 1000);
-    }
-    private tick(): void {
-        if(!this.isPaused) {
-            this.buttonLabel = "Pause";
-
-            if (--this.seconds < 0) {
-                this.seconds = 59;
-                if (--this.minutes < 0) {
-                    this.resetTimer();
-                }
-            }
-        }
+        this.tasksService = new TasksService();
+        this.tasks = this.tasksService.taskStore;
+        this.today = new Date();
+        this.updateQueuedPomodoros();
     }
 
-    private resetTimer(): void {
-        this.minutes=24;
-        this.seconds=59;
-        this.buttonLabel="Start";
-        this.togglePause();
+    toggleTask(task: Task): void {
+        task.queued = !task.queued;
+        this.updateQueuedPomodoros();
     }
-    private togglePause(): void {
-        this.isPaused = !this.isPaused;
-        if(this.minutes<24 || this.seconds<59){
-            this.buttonLabel= this.isPaused ? "Resume" : "Pause";
-        }
-    }
-    countdownCompleted(){
-        alert("End of time!");
+
+    private updateQueuedPomodoros(): void {
+        this.queuedPomodoros = this.tasks
+            .filter ((task: Task) => task.queued)
+            .reduce((pomodoros: number, queuedTask: Task) => {
+                return pomodoros + queuedTask.pomodorosRequired;
+            }, 0);
     }
 }

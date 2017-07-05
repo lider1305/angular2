@@ -1,11 +1,11 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {AppComponent} from "./app.component"
-import {CountDownComponent} from "./CountDownComponent";
+import {TaskIconComponent} from "./task-icon.component"
 
 @NgModule({
     imports:[BrowserModule],
-    declarations:[AppComponent,CountDownComponent],
+    declarations:[AppComponent,TaskIconComponent],
     bootstrap:[AppComponent]
 })
 export class AppModule{
