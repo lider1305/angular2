@@ -11,14 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
-var task_icon_component_1 = require("./task-icon.component");
+var shared_1 = require("./shared/shared");
+var timer_1 = require("./timer/timer");
+var task_1 = require("./tasks/task");
+var task_icon_component_1 = require("./tasks/task-icon.component");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent, task_icon_component_1.TaskIconComponent],
+            declarations: [app_component_1.AppComponent, shared_1.SHARED_PIPES, timer_1.TIMER_DIRECTIVES, task_1.TASKS_DIRECTIVES, task_icon_component_1.TaskIconComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
