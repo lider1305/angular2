@@ -17,7 +17,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'app',
             providers: [shared_1.SHARED_PROVIDERS],
-            template: "\n        <nav class=\"navbar navbar-default navbar-static-top\">\n        <div class=\"container\">\n        <div class=\"navbar-header\">\n        <strong class=\"navbar-brand\">My  App</strong>\n    </div>\n    </div>\n    </nav>\n    <timer-widjet></timer-widjet>\n    <tasks-div></tasks-div>\n"
+            template: "\n        <nav class=\"navbar navbar-default navbar-static-top\">\n        <div class=\"container\">\n        <div class=\"navbar-header\">\n<<<<<<< HEAD\n        <strong class=\"navbar-brand\">My  App</strong>\n=======\n        <strong class=\"navbar-brand\">My Pomodoro App</strong>\n>>>>>>> origin/new-example\n    </div>\n    </div>\n    </nav>\n    <timer-widjet></timer-widjet>\n    <tasks-div></tasks-div>\n"
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

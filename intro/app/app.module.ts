@@ -13,4 +13,5 @@ import {TaskIconComponent} from "./tasks/task-icon.component";
     bootstrap:[AppComponent]
 })
 export class AppModule{
+
 }
