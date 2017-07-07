@@ -9,15 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var shared_1 = require("./shared/shared");
+require('rxjs/add/operator/map');
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
-            providers: [shared_1.SHARED_PROVIDERS],
-            template: "\n        <nav class=\"navbar navbar-default navbar-static-top\">\n        <div class=\"container\">\n        <div class=\"navbar-header\">\n<<<<<<< HEAD\n        <strong class=\"navbar-brand\">My  App</strong>\n=======\n        <strong class=\"navbar-brand\">My Pomodoro App</strong>\n>>>>>>> origin/new-example\n    </div>\n    </div>\n    </nav>\n    <timer-widjet></timer-widjet>\n    <tasks-div></tasks-div>\n"
+            templateUrl: "./app/app.component.html"
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

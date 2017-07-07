@@ -14,14 +14,22 @@ var app_component_1 = require("./app.component");
 var shared_1 = require("./shared/shared");
 var timer_1 = require("./timer/timer");
 var task_1 = require("./tasks/task");
-var task_icon_component_1 = require("./tasks/task-icon.component");
+var http_1 = require("@angular/http");
+var router_1 = require('@angular/router');
+var timer_component_1 = require("./timer/timer.component");
+var appRoutes = [
+    { path: '', component: task_1.TasksComponent, pathMatch: 'full' },
+    { path: 'tasks/editor', component: task_1.TaskEditorComponent },
+    { path: 'timer', component: timer_component_1.default }
+];
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent, shared_1.SHARED_PIPES, timer_1.TIMER_DIRECTIVES, task_1.TASKS_DIRECTIVES, task_icon_component_1.TaskIconComponent],
+            imports: [platform_browser_1.BrowserModule, http_1.HttpModule, router_1.RouterModule, router_1.RouterModule.forRoot(appRoutes)],
+            declarations: [app_component_1.AppComponent, shared_1.SHARED_PIPES, timer_1.TIMER_DIRECTIVES, task_1.TASKS_DIRECTIVES],
+            providers: [shared_1.SHARED_PROVIDERS],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

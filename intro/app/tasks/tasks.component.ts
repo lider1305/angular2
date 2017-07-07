@@ -5,6 +5,7 @@ import {
     Task,
     SHARED_PIPES
 } from '../shared/shared';
+import {Router} from "@angular/router";
 
 @Component({
     selector:'tasks-div',
@@ -20,15 +21,20 @@ export class TasksComponent{
     timerMinutes:number;
 
     constructor(private taskService: TaskService,
-                private settingsService: SettingsService){
+                private settingsService: SettingsService,
+                private router: Router ){
         this.tasks = this.taskService.taskStore;
         this.today = new Date();
         this.queueHeaderMapping = settingsService.pluralsMap.tasks;
         this.timerMinutes = settingsService.timerMinutes;
     }
 
-    ngOnlnit(): void {
+    ngOnInit(): void {
         this.updateQueuedPomodoros();
+        this.taskService.taskFeed.subscribe(newTask => {
+            this.tasks.push(newTask);
+            this.updateQueuedPomodoros();
+        });
     }
 
     toggleTask(task: Task): void {
@@ -42,5 +48,8 @@ export class TasksComponent{
             .reduce((pomodoros: number, queuedTask: Task) => {
                 return pomodoros + queuedTask.pomodorosRequired;
             }, 0);
+    }
+    workOn(): void {
+        this.router.navigate(['timer']);
     }
 }

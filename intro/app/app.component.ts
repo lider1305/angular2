@@ -1,18 +1,8 @@
 import { Component } from '@angular/core';
-import {SHARED_PROVIDERS} from "./shared/shared";
+import 'rxjs/add/operator/map';
+
 @Component({
     selector: 'app',
-    providers: [SHARED_PROVIDERS],
-    template:`
-        <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-        <div class="navbar-header">
-        <strong class="navbar-brand">My  App</strong>
-    </div>
-    </div>
-    </nav>
-    <timer-widjet></timer-widjet>
-    <tasks-div></tasks-div>
-`
+    templateUrl:"./app/app.component.html"
 })
 export class AppComponent {}
